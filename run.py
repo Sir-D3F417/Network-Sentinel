@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import logging
+import json
 # Suppress Wireshark warning
 logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
 
@@ -24,5 +25,5 @@ if __name__ == "__main__":
         sentinel.running = False
         print("\nStopping Network Sentinel...")
         # Save final statistics
-        with open('session_stats.json', 'w') as f:
+        with open('stats.json', 'w') as f:
             json.dump(sentinel.stats, f, indent=4) 
