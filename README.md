@@ -29,7 +29,7 @@ Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 
 ## Install system dependencies (Ubuntu/Debian)
 
-sudo apt-get update
+</ul><p><code>sudo apt-get update</code></p>
 
 sudo apt-get install python3-dev python3-pip tcpdump wireshark
 
