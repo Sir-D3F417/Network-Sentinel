@@ -24,6 +24,11 @@ from network_sentinel.threat_detector import ThreatDetector
 from network_sentinel.packet_analyzer import PacketAnalyzer
 from network_sentinel.utils.security_checks import SecurityChecker
 from network_sentinel.utils.secure_storage import SecureStorage
+from .config import NetworkSentinelConfig
+
+class SecurityError(Exception):
+    """Custom exception for security-related errors"""
+    pass
 
 class NetworkSentinel:
     def __init__(self, config):
@@ -541,6 +546,7 @@ def show_banner():
     """
 
 if __name__ == "__main__":
+    config = NetworkSentinelConfig.load()
     sentinel = NetworkSentinel(config)
     try:
         print(show_banner())
