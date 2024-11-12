@@ -25,105 +25,102 @@ Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 - Beautiful console interface with live statistics
 - Automatic model training and adaptation
 
-## Installation
-
 ## Install system dependencies (Ubuntu/Debian)
 
 </ul><p><code>sudo apt-get update</code></p>
 
-sudo apt-get install python3-dev python3-pip tcpdump wireshark
+</ul><p><code>sudo apt-get install python3-dev python3-pip tcpdump wireshark</code></p>
 
 - Clone repository
 
-git clone https://github.com/D3F417/network-sentinel.git
+</ul><p><code>git clone https://github.com/D3F417/network-sentinel.git</code></p>
 
-cd network-sentinel
+</ul><p><code>cd network-sentinel</code></p>
 
 - Create virtual environment
 
-python3 -m venv venv
+</ul><p><code>python3 -m venv venv</code></p>
 
-source venv/bin/activate
+</ul><p><code>source venv/bin/activate</code></p>
 
 - Install requirements & ns tool
 
-pip install -r requirements.txt
+</ul><p><code>pip install -r requirements.txt</code></p>
 
-pip install -e .
+</ul><p><code>pip install -e .</code></p>
 
 
 Check if installed
 
-pip list | grep network-sentinel
+</ul><p><code>pip list | grep network-sentinel</code></p>
 
 Test CLI
 
-network-sentinel --help
+</ul><p><code>network-sentinel --help</code></p>
 
 List available interfaces
 
-sudo network-sentinel list-interfaces
+</ul><p><code>sudo network-sentinel list-interfaces</code></p>
 
 Start monitoring (replace eth0 with your interface)
 
-sudo network-sentinel monitor -i eth0 -v
+</ul><p><code>sudo network-sentinel monitor -i eth0 -v</code></p>
 
 ### Windows
 
-Install Npcap from https://npcap.com/#download
-
+- Install Npcap from https://npcap.com/#download
 
 Open PowerShell as Administrator and run:
 
-Set-ExecutionPolicy RemoteSigned
+</ul><p><code>Set-ExecutionPolicy RemoteSigned</code></p>
 
 Create virtual environment
 
-python -m venv venv
+</ul><p><code>python -m venv venv</code></p>
 
 Activate (PowerShell)
 
-.\venv\Scripts\Activate.ps1
+</ul><p><code>.\venv\Scripts\Activate.ps1</code></p>
 
 Or CMD
 
-venv\Scripts\activate.bat
+</ul><p><code>venv\Scripts\activate.bat</code></p>
 
 Install requirements
 
-pip install -r requirements.txt
+</ul><p><code>pip install -r requirements.txt</code></p>
 
 Install the package in development mode
 
-pip install -e .
+</ul><p><code>pip install -e .</code></p>
 
 Check if installed
 
-pip list | findstr network-sentinel
+</ul><p><code>pip list | findstr network-sentinel</code></p>
 
 Test CLI
 
-network-sentinel --help
+</ul><p><code>network-sentinel --help</code></p>
 
 Open PowerShell as Administrator and run:
 
 List available interfaces
 
-network-sentinel list-interfaces
+</ul><p><code>network-sentinel list-interfaces</code></p>
 
 Start monitoring (replace "Wi-Fi" with your interface name)
 
-network-sentinel monitor -i "Wi-Fi" -v
+</ul><p><code>network-sentinel monitor -i "Wi-Fi" -v</code></p>
 
 ## Usage
 
 List available interfaces
 
-sudo network-sentinel list-interfaces
+</ul><p><code>sudo network-sentinel list-interfaces</code></p>
 
 Start monitoring (replace eth0 with your interface)
 
-sudo network-sentinel monitor -i eth0 -v
+</ul><p><code>sudo network-sentinel monitor -i eth0 -v</code></p>
 
 ## Beta Notice
 This is a beta release. While the tool is functional, you may encounter bugs or incomplete features. Please report any issues on GitHub.
