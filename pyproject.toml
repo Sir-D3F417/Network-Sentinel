@@ -6,6 +6,10 @@ build-backend = "setuptools.build_meta"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = "-ra -q"
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks tests as integration tests"
+]
 
 [tool.black]
 line-length = 88
