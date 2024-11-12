@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+include requirements.txt
+include pyproject.toml
+recursive-include network_sentinel/config *.yaml
+recursive-include docs *.md 
