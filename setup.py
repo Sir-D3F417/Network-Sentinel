@@ -17,7 +17,7 @@ setup(
     description="Advanced Network Security Monitoring Tool with ML capabilities",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Sir-D3F417/network-sentinel",
+    url="https://github.com/Sir-D3F417/Network-Sentinel",
     packages=find_packages(),
     install_requires=requirements,
     entry_points={
