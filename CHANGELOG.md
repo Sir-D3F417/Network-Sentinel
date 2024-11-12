@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0-beta] - 2024-XX-XX
+## [2.0.0-beta] - 2024-11-12
 
 ### Added
 - Real-time network packet analysis
