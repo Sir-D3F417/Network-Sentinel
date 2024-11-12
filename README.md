@@ -50,19 +50,19 @@ Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 </ul><p><code>pip install -e .</code></p>
 
 
-Check if installed
+- Check if installed
 
 </ul><p><code>pip list | grep network-sentinel</code></p>
 
-Test CLI
+- Test CLI
 
 </ul><p><code>network-sentinel --help</code></p>
 
-List available interfaces
+- List available interfaces
 
 </ul><p><code>sudo network-sentinel list-interfaces</code></p>
 
-Start monitoring (replace eth0 with your interface)
+- Start monitoring (replace eth0 with your interface)
 
 </ul><p><code>sudo network-sentinel monitor -i eth0 -v</code></p>
 
@@ -70,55 +70,55 @@ Start monitoring (replace eth0 with your interface)
 
 - Install Npcap from https://npcap.com/#download
 
-Open PowerShell as Administrator and run:
+- Open PowerShell as Administrator and run:
 
 </ul><p><code>Set-ExecutionPolicy RemoteSigned</code></p>
 
-Create virtual environment
+- Create virtual environment
 
 </ul><p><code>python -m venv venv</code></p>
 
-Activate (PowerShell)
+- Activate (PowerShell)
 
 </ul><p><code>.\venv\Scripts\Activate.ps1</code></p>
 
-Or CMD
+- Or CMD
 
 </ul><p><code>venv\Scripts\activate.bat</code></p>
 
-Install requirements
+- Install requirements
 
 </ul><p><code>pip install -r requirements.txt</code></p>
 
-Install the package in development mode
+- Install the package in development mode
 
 </ul><p><code>pip install -e .</code></p>
 
-Check if installed
+- Check if installed
 
 </ul><p><code>pip list | findstr network-sentinel</code></p>
 
-Test CLI
+- Test CLI
 
 </ul><p><code>network-sentinel --help</code></p>
 
-Open PowerShell as Administrator and run:
+- Open PowerShell as Administrator and run:
 
-List available interfaces
+- List available interfaces
 
 </ul><p><code>network-sentinel list-interfaces</code></p>
 
-Start monitoring (replace "Wi-Fi" with your interface name)
+- Start monitoring (replace "Wi-Fi" with your interface name)
 
 </ul><p><code>network-sentinel monitor -i "Wi-Fi" -v</code></p>
 
 ## Usage
 
-List available interfaces
+- List available interfaces
 
 </ul><p><code>sudo network-sentinel list-interfaces</code></p>
 
-Start monitoring (replace eth0 with your interface)
+- Start monitoring (replace eth0 with your interface)
 
 </ul><p><code>sudo network-sentinel monitor -i eth0 -v</code></p>
 
