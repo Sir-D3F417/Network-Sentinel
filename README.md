@@ -1,9 +1,12 @@
 # Network Sentinel
 
 ![Version](https://img.shields.io/badge/version-2.0.0--beta-blue)
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Author](https://img.shields.io/badge/author-D3F417-orange)
+![Team](https://img.shields.io/badge/team-RastaKhiz-red)
 
+## About
 Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 
 ## Created By
