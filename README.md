@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-3.8+-blue)](https://www.python.org/downloads/)
 [![CodeCov](https://codecov.io/gh/Sir-D3F417/Network-Sentinel/branch/main/graph/badge.svg)](https://codecov.io/gh/Sir-D3F417/Network-Sentinel)
 [![Report Bug](https://img.shields.io/badge/Report%20Bug-red?style=flat&logo=github)](https://github.com/Sir-D3F417/Network-Sentinel/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D)
-[![Telegram](https://img.shields.io/badge/Join%20Us-Telegram-blue?style=flat&logo=telegram)](https://t.me/RastaKhiz)
+[![Telegram](https://img.shields.io/badge/Join%20Us-Telegram-blue?style=flat&logo=telegram)](https://t.me/RastakhizTM)
 [![Stars](https://img.shields.io/github/stars/Sir-D3F417/Network-Sentinel?style=social)](https://github.com/Sir-D3F417/Network-Sentinel/stargazers)
 
 ![Alt Text](https://s8.uupload.ir/files/leonardo_phoenix_a_sleek_and_futuristic_3d_banner_for_network_1_jjeq.jpg)
