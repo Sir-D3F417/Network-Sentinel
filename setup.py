@@ -15,9 +15,21 @@ setup(
     author="D3F417",
     author_email="info@d3f417.info",
     description="Advanced Network Security Monitoring Tool with ML capabilities",
-    long_description=long_description,
+    long_description="""
+    Network Sentinel is a comprehensive network security monitoring solution that 
+    combines traditional packet analysis with machine learning for advanced threat 
+    detection. Features include real-time monitoring, anomaly detection, port scan 
+    detection, and secure data handling.
+    
+    Key capabilities:
+    - ML-based threat detection
+    - Real-time packet analysis
+    - Advanced scan detection
+    - Performance monitoring
+    - Secure data storage
+    """,
     long_description_content_type="text/markdown",
-    url="https://github.com/Sir-D3F417/Network-Sentinel",
+    url="https://github.com/Sir-D3F417/network-sentinel",
     packages=find_packages(),
     install_requires=requirements,
     entry_points={
