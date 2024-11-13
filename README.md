@@ -1,12 +1,10 @@
 # Network Sentinel
 
 ![Version](https://img.shields.io/badge/version-2.0.0--beta-blue)
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Author](https://img.shields.io/badge/author-D3F417-orange)
-![Team](https://img.shields.io/badge/team-RastaKhiz-red)
+[![codecov](https://codecov.io/gh/Sir-D3F417/Network-Sentinel/branch/main/graph/badge.svg)](https://codecov.io/gh/Sir-D3F417/Network-Sentinel)
 
-## About
 Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 
 ## Created By
@@ -25,102 +23,76 @@ Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 - Beautiful console interface with live statistics
 - Automatic model training and adaptation
 
+## Installation
+
+### Linux
+
 ## Install system dependencies (Ubuntu/Debian)
+sudo apt-get update
+sudo apt-get install python3-dev python3-pip tcpdump wireshark
+## Clone repository
+git clone https://github.com/D3F417/network-sentinel.git
+cd network-sentinel
+##Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+Install requirements
+pip install -r requirements.txt
+Install package
+pip install -e .
 
-</ul><p><code>sudo apt-get update</code></p>
+# Check if installed
+pip list | grep network-sentinel
 
-</ul><p><code>sudo apt-get install python3-dev python3-pip tcpdump wireshark</code></p>
+# Test CLI
+network-sentinel --help
 
-- Clone repository
+# List available interfaces
+sudo network-sentinel list-interfaces
 
-</ul><p><code>git clone https://github.com/D3F417/network-sentinel.git</code></p>
-
-</ul><p><code>cd network-sentinel</code></p>
-
-- Create virtual environment
-
-</ul><p><code>python3 -m venv venv</code></p>
-
-</ul><p><code>source venv/bin/activate</code></p>
-
-- Install requirements & ns tool
-
-</ul><p><code>pip install -r requirements.txt</code></p>
-
-</ul><p><code>pip install -e .</code></p>
-
-
-- Check if installed
-
-</ul><p><code>pip list | grep network-sentinel</code></p>
-
-- Test CLI
-
-</ul><p><code>network-sentinel --help</code></p>
-
-- List available interfaces
-
-</ul><p><code>sudo network-sentinel list-interfaces</code></p>
-
-- Start monitoring (replace eth0 with your interface)
-
-</ul><p><code>sudo network-sentinel monitor -i eth0 -v</code></p>
+# Start monitoring (replace eth0 with your interface)
+sudo network-sentinel monitor -i eth0 -v
 
 ### Windows
+# Install Npcap from https://npcap.com/#download
 
-- Install Npcap from https://npcap.com/#download
+# Open PowerShell as Administrator and run:
+Set-ExecutionPolicy RemoteSigned
 
-- Open PowerShell as Administrator and run:
+# Create virtual environment
+python -m venv venv
 
-</ul><p><code>Set-ExecutionPolicy RemoteSigned</code></p>
+# Activate (PowerShell)
+.\venv\Scripts\Activate.ps1
 
-- Create virtual environment
+# Or CMD
+venv\Scripts\activate.bat
 
-</ul><p><code>python -m venv venv</code></p>
+# Install requirements
+pip install -r requirements.txt
 
-- Activate (PowerShell)
+# Install the package in development mode
+pip install -e .
 
-</ul><p><code>.\venv\Scripts\Activate.ps1</code></p>
+# Check if installed
+pip list | findstr network-sentinel
 
-- Or CMD
+# Test CLI
+network-sentinel --help
 
-</ul><p><code>venv\Scripts\activate.bat</code></p>
+# Open PowerShell as Administrator and run:
+# List available interfaces
+network-sentinel list-interfaces
 
-- Install requirements
-
-</ul><p><code>pip install -r requirements.txt</code></p>
-
-- Install the package in development mode
-
-</ul><p><code>pip install -e .</code></p>
-
-- Check if installed
-
-</ul><p><code>pip list | findstr network-sentinel</code></p>
-
-- Test CLI
-
-</ul><p><code>network-sentinel --help</code></p>
-
-- Open PowerShell as Administrator and run:
-
-- List available interfaces
-
-</ul><p><code>network-sentinel list-interfaces</code></p>
-
-- Start monitoring (replace "Wi-Fi" with your interface name)
-
-</ul><p><code>network-sentinel monitor -i "Wi-Fi" -v</code></p>
+# Start monitoring (replace "Wi-Fi" with your interface name)
+network-sentinel monitor -i "Wi-Fi" -v
 
 ## Usage
 
-- List available interfaces
-
-</ul><p><code>sudo network-sentinel list-interfaces</code></p>
-
-- Start monitoring (replace eth0 with your interface)
-
-</ul><p><code>sudo network-sentinel monitor -i eth0 -v</code></p>
+List available interfaces
+sudo network-sentinel list-interfaces
+Start monitoring (replace eth0 with your interface)
+sudo network-sentinel monitor -i eth0 -v
 
 ## Beta Notice
 This is a beta release. While the tool is functional, you may encounter bugs or incomplete features. Please report any issues on GitHub.
