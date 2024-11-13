@@ -4,7 +4,6 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-blue)](https://www.python.org/downloads/)
 [![CodeCov](https://codecov.io/gh/Sir-D3F417/Network-Sentinel/branch/main/graph/badge.svg)](https://codecov.io/gh/Sir-D3F417/Network-Sentinel)
-[![Report Bug](https://img.shields.io/badge/Report%20Bug-red?style=flat&logo=github)](https://github.com/Sir-D3F417/Network-Sentinel/blob/main/.github/ISSUE_TEMPLATE/%F0%9F%90%9B-bug-report.md)
 [![Telegram](https://img.shields.io/badge/Join%20Us-Telegram-blue?style=flat&logo=telegram)](https://t.me/RastakhizTM)
 [![Stars](https://img.shields.io/github/stars/Sir-D3F417/Network-Sentinel?style=social)](https://github.com/Sir-D3F417/Network-Sentinel/stargazers)
 
@@ -32,7 +31,23 @@ Network Sentinel is a sophisticated network security monitoring tool that uses m
 - Known threat detection
 - Custom rule support
 
+## 🐛 Reporting Issues
 
+### Bug Reports
+1. Go to [Issues](https://github.com/Sir-D3F417/Network-Sentinel/issues)
+2. Click "New Issue"
+3. Select "🐛 Bug Report"
+4. Fill in the template with detailed information
+5. Include logs and screenshots if possible
+
+### Feature Requests
+1. Go to [Issues](https://github.com/Sir-D3F417/Network-Sentinel/issues)
+2. Click "New Issue"
+3. Select "💡 Feature Request"
+4. Describe your feature idea
+5. Explain the use case and benefits
+
+   
 ## Created By
 - **Author**: D3F417
 - **Team**: RastaKhiz Team
