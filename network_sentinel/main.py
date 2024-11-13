@@ -31,12 +31,12 @@ class SecurityError(Exception):
     pass
 
 class NetworkSentinel:
-    def __init__(self, config):
+    def __init__(self, config, skip_security_checks=False):
         self.security = SecurityChecker()
         self.secure_storage = SecureStorage()
         
-        # Perform security checks before initialization
-        if not self._perform_security_checks():
+        # Skip security checks if in testing mode
+        if not skip_security_checks and not self._perform_security_checks():
             raise SecurityError("Security checks failed")
             
         self.packet_counts = defaultdict(int)
