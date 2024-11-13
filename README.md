@@ -5,6 +5,8 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![codecov](https://codecov.io/gh/Sir-D3F417/Network-Sentinel/branch/main/graph/badge.svg)](https://codecov.io/gh/Sir-D3F417/Network-Sentinel)
 
+![Alt Text](https://s8.uupload.ir/files/leonardo_phoenix_a_sleek_and_futuristic_3d_banner_for_network_1_jjeq.jpg)
+
 Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 
 ## Created By
