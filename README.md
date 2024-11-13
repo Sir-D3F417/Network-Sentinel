@@ -7,23 +7,33 @@
 
 ![Alt Text](https://s8.uupload.ir/files/leonardo_phoenix_a_sleek_and_futuristic_3d_banner_for_network_1_jjeq.jpg)
 
-Advanced Network Security Monitoring Tool with Machine Learning capabilities.
+## Advanced Network Security Monitoring Tool
+
+Network Sentinel is a sophisticated network security monitoring tool that uses machine learning for threat detection and real-time network analysis.
+
+### Key Features
+- 🔍 Real-time packet analysis and threat detection
+- 🤖 Machine Learning-based anomaly detection
+- 🚨 Advanced port scan detection (NULL, SYN, ACK scans)
+- 📊 Live traffic monitoring and visualization
+- 🛡️ Detection of common attack patterns
+- 📝 Detailed logging and reporting
+- 🔐 Secure storage of sensitive data
+- 📈 Performance monitoring and optimization
+
+### Security Features
+- SYN/ACK flood detection
+- Port scan detection
+- Malware C2 channel detection
+- Suspicious connection monitoring
+- Known threat detection
+- Custom rule support
+
 
 ## Created By
 - **Author**: D3F417
 - **Team**: RastaKhiz Team
 - **Version**: 2.0.0-beta
-
-## Features
-- Real-time network packet analysis
-- Machine learning-based anomaly detection
-- Multiple attack pattern recognition:
-  - Port scanning (SYN, ACK, NULL, FIN, XMAS scans)
-  - DDoS attacks (SYN flood, UDP flood, ICMP flood)
-  - DNS amplification attacks
-  - Suspicious connection detection
-- Beautiful console interface with live statistics
-- Automatic model training and adaptation
 
 ## Install system dependencies (Ubuntu/Debian)
 ```bash
