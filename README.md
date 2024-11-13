@@ -7,6 +7,8 @@
 
 ![Alt Text](https://s8.uupload.ir/files/leonardo_phoenix_a_sleek_and_futuristic_3d_banner_for_network_1_jjeq.jpg)
 
+<img src="https://s8.uupload.ir/files/leonardo_phoenix_a_sleek_and_futuristic_3d_banner_for_network_1_jjeq.jpg" alt="Alt Text" style="width:100%;">
+
 Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 
 ## Created By
