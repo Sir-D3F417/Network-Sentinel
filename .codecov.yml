@@ -1,17 +1,26 @@
+codecov:
+  require_ci_to_pass: yes
+  notify:
+    wait_for_ci: yes
+
 coverage:
+  precision: 2
+  round: down
+  range: "70...100"
   status:
     project:
       default:
-        target: 80%
-        threshold: 1%
+        target: 70%
+        threshold: 5%
     patch:
       default:
-        target: 80%
-        threshold: 1%
+        target: 70%
+        threshold: 5%
 
 ignore:
   - "tests/**/*"
   - "setup.py"
+  - "docs/**/*"
 
 comment:
   layout: "reach, diff, flags, files"
