@@ -23,82 +23,133 @@ Advanced Network Security Monitoring Tool with Machine Learning capabilities.
 - Beautiful console interface with live statistics
 - Automatic model training and adaptation
 
-## Installation
-
-### Linux
-
 ## Install system dependencies (Ubuntu/Debian)
+```bash
 sudo apt-get update
 sudo apt-get install python3-dev python3-pip tcpdump wireshark
-## Clone repository
+```
+- Clone repository
+```bash
 git clone https://github.com/D3F417/network-sentinel.git
 cd network-sentinel
-##Create virtual environment
+```
+- Create virtual environment
+```bash
 python3 -m venv venv
 source venv/bin/activate
-Install requirements
-pip install -r requirements.txt
-Install package
-pip install -e .
+```
+- Install requirements
 
-# Check if installed
+```bash
+pip install -r requirements.txt
+```
+- Install package
+
+```bash
+pip install -e .
+```
+
+- Check if installed
+
+```bash
 pip list | grep network-sentinel
+```
 
-# Test CLI
+- Test CLI
+
+```bash
 network-sentinel --help
+```
 
-# List available interfaces
+- List available interfaces
+
+```bash
 sudo network-sentinel list-interfaces
+```
 
-# Start monitoring (replace eth0 with your interface)
+- Start monitoring (replace eth0 with your interface)
+
+```bash
 sudo network-sentinel monitor -i eth0 -v
+```
 
-### Windows
-# Install Npcap from https://npcap.com/#download
+## Windows
 
-# Open PowerShell as Administrator and run:
+- Install Npcap from https://npcap.com/#download
+
+- Open PowerShell as Administrator and run:
+
+```bash
 Set-ExecutionPolicy RemoteSigned
+```
 
-# Create virtual environment
+- Create virtual environment
+
+```bash
 python -m venv venv
+```
 
-# Activate (PowerShell)
+- Activate (PowerShell)
+
+```bash
 .\venv\Scripts\Activate.ps1
-
-# Or CMD
+Or CMD
 venv\Scripts\activate.bat
+```
 
-# Install requirements
+-Install requirements
+
+```bash
 pip install -r requirements.txt
+```
 
-# Install the package in development mode
+- Install the package in development mode
+
+```bash
 pip install -e .
+```
 
-# Check if installed
+- Check if installed
+
+```bash
 pip list | findstr network-sentinel
+```
 
-# Test CLI
+- Test CLI
+
+```bash
 network-sentinel --help
+```
 
-# Open PowerShell as Administrator and run:
-# List available interfaces
+
+Open PowerShell as Administrator and run:
+List available interfaces
+
+```bash
 network-sentinel list-interfaces
+```
+- Start monitoring (replace "Wi-Fi" with your interface name)
 
-# Start monitoring (replace "Wi-Fi" with your interface name)
+```bash
 network-sentinel monitor -i "Wi-Fi" -v
+```
 
 ## Usage
 
 List available interfaces
+```bash
 sudo network-sentinel list-interfaces
+```
 Start monitoring (replace eth0 with your interface)
+```bash
 sudo network-sentinel monitor -i eth0 -v
-
+```
 ## Beta Notice
 This is a beta release. While the tool is functional, you may encounter bugs or incomplete features. Please report any issues on GitHub.
 
 ## License
-MIT License - see LICENSE file for details.
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
 ## Credits
 Created by D3F417 (RastaKhiz Team)
