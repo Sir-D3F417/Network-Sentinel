@@ -6,9 +6,12 @@ import logging
 from pathlib import Path
 
 class SecureStorage:
-    def __init__(self):
+    def __init__(self, key_dir=None):
         self.logger = logging.getLogger(__name__)
-        self.key_file = Path('./config/.key')
+        if key_dir:
+            self.key_file = Path(key_dir) / '.key'
+        else:
+            self.key_file = Path('./config/.key')
         self.key = self._load_or_create_key()
         self.fernet = Fernet(self.key)
 
