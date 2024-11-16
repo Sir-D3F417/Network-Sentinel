@@ -103,7 +103,7 @@ sudo network-sentinel list-interfaces
 sudo network-sentinel monitor -i eth0 -v
 ```
 
-![](https://s8.uupload.ir/files/record_2024_11_16_05_40_40_751_iei0.gif)
+![](https://s8.uupload.ir/files/record_2024_11_16_05_41_32_141_0z5l.gif)
 
 ## Windows
 
@@ -177,7 +177,7 @@ Start monitoring (replace eth0 with your interface)
 sudo network-sentinel monitor -i eth0 -v
 ```
 
-![](https://s8.uupload.ir/files/record_2024_11_16_05_41_32_141_0z5l.gif)
+![](https://s8.uupload.ir/files/record_2024_11_16_05_40_40_751_iei0.gif)
 
 ## Beta Notice
 This is a beta release. While the tool is functional, you may encounter bugs or incomplete features. Please report any issues on GitHub.
