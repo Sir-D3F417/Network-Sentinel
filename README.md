@@ -50,6 +50,23 @@ Network Sentinel is a sophisticated network security monitoring tool that uses m
 - Known threat detection
 - Custom rule support
 
+## Technical Specifications
+
+- Python 3.8+ compatibility
+- Cross-platform support (Windows, Linux)
+- Modular architecture
+- Extensible plugin system
+- REST API support (upcoming)
+- ML-powered threat detection
+
+
+### Known Issues
+
+- High CPU usage during initial ML training
+- False positives in certain network conditions
+- Limited IPv6 support
+- Memory optimization needed for large networks
+
 ## 🐛 Reporting Issues
 
 ### Bug Reports
