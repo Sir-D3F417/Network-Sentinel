@@ -1,6 +1,6 @@
 # Network Sentinel
 
-![Version](https://img.shields.io/badge/version-2.1.0--blue)
+![Version](https://img.shields.io/badge/version-2.1.0---blue)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-blue)](https://www.python.org/downloads/)
 [![CodeCov](https://codecov.io/gh/Sir-D3F417/Network-Sentinel/branch/main/graph/badge.svg)](https://codecov.io/gh/Sir-D3F417/Network-Sentinel)
