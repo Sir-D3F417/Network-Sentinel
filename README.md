@@ -233,8 +233,16 @@ sudo network-sentinel monitor -i eth0 -v
 
 ![](https://s8.uupload.ir/files/record_2024_11_16_05_40_40_751_iei0.gif)
 
-## Beta Notice
-This is a beta release. While the tool is functional, you may encounter bugs or incomplete features. Please report any issues on GitHub.
+## Authors
+
+- **D3F417** - *Initial work and maintenance* - [Sir-D3F417](https://github.com/Sir-D3F417)
+- **RastaKhiz Team** - *Development Team*
+
+## Contact
+
+- Email: info@d3f417.info
+- GitHub: [Sir-D3F417](https://github.com/Sir-D3F417)
+
 
 ## License
 
