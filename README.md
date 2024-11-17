@@ -9,7 +9,7 @@
 
 ![Alt Text](https://s8.uupload.ir/files/leonardo_phoenix_a_sleek_and_futuristic_3d_banner_for_network_1_jjeq.jpg)
 
-## Advanced Network Security Monitoring Tool
+## 🌈 Advanced Network Security Monitoring Tool
 
 Network Sentinel is a sophisticated network security monitoring tool that uses machine learning for threat detection and real-time network analysis.
 
@@ -50,7 +50,7 @@ Network Sentinel is a sophisticated network security monitoring tool that uses m
 - Known threat detection
 - Custom rule support
 
-## Technical Specifications
+## 👾 Technical Specifications
 
 - Python 3.8+ compatibility
 - Cross-platform support (Windows, Linux)
