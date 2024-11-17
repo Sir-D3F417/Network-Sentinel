@@ -152,7 +152,16 @@ sudo network-sentinel monitor -i eth0 -v
 
 ## Windows
 
-- Install Npcap from https://npcap.com/#download
+### Windows Prerequisites
+
+1. Install Npcap:
+   - Download from [Npcap website](https://npcap.com/#download)
+   - Run installer as administrator
+   - Select "Install Npcap in WinPcap API-compatible Mode"
+
+2. Install Wireshark (optional but recommended):
+   - Download from [Wireshark website](https://www.wireshark.org/download.html)
+   - This will provide the manufacturer database for better device identification
 
 - Open PowerShell as Administrator and run:
 
