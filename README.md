@@ -248,5 +248,31 @@ sudo network-sentinel monitor -i eth0 -v
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-## Credits
-Created by D3F417 (RastaKhiz Team)
+## Uninstall on Windows
+
+Stop the service if installed
+```bash
+Stop-Service NetworkSentinel -ErrorAction SilentlyContinue
+```
+```bash
+pip uninstall network-sentinel -y
+```
+Remove configuration and data directories
+```bash
+Remove-Item -Path "$env:APPDATA\Network-Sentinel" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Network-Sentinel" -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+Remove logs
+```bash
+Remove-Item -Path ".\logs" -Recurse -Force -ErrorAction SilentlyContinue
+```
+Remove models
+```bash
+Remove-Item -Path ".\models" -Recurse -Force -ErrorAction SilentlyContinue
+```
+Remove session data
+```bash
+Remove-Item -Path "session_stats.json" -Force -ErrorAction SilentlyContinue
+Remove-Item -Path ".enc" -Force -ErrorAction SilentlyContinu
+```
