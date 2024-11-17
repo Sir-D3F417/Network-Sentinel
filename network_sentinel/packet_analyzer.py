@@ -3,13 +3,24 @@ from collections import deque, defaultdict
 import time
 import numpy as np
 import logging
+import threading
+from threading import Lock
 
 class PacketAnalyzer:
     def __init__(self):
+        # Updated thresholds
+        self.syn_flood_threshold = 150  # Increased from 100
+        self.udp_flood_threshold = 1200  # Increased from 1000
+        self.icmp_flood_threshold = 75   # Increased from 50
+        
+        # New cleanup configuration
+        self.cleanup_interval = 180  # Reduced from 300
+        self.max_history_size = 5000  # Reduced from 10000
+        
+        # Add thread safety
+        self._lock = threading.Lock()
+        
         # Enhanced thresholds and configuration
-        self.syn_flood_threshold = 100
-        self.udp_flood_threshold = 1000
-        self.icmp_flood_threshold = 50
         self.port_scan_window = 60  # Time window in seconds
         self.packet_history = deque(maxlen=10000)
         self.last_packet_times = {}
@@ -33,6 +44,14 @@ class PacketAnalyzer:
                 'last_reset': time.time()
             })
         }
+        
+        # Add cleanup timers
+        self.last_cleanup = time.time()
+        self.cleanup_interval = 300  # 5 minutes
+        self.max_history_size = 10000
+        
+        # Add thread safety
+        self.lock = Lock()
         
     def analyze_packet(self, packet):
         """
@@ -232,7 +251,7 @@ class PacketAnalyzer:
         src_ip = packet[scapy.IP].src
         dst_port = packet[scapy.TCP].dport
         
-        # Check for common malware command and control ports
+        # Updated suspicious ports list
         suspicious_ports = {
             4444,  # Metasploit
             1433,  # SQL Server
@@ -240,7 +259,10 @@ class PacketAnalyzer:
             445,   # SMB
             135,   # RPC
             22,    # SSH
-            23     # Telnet
+            23,    # Telnet
+            6666,  # Added: IRC
+            8080,  # Added: Alternative HTTP
+            9001   # Added: Common backdoor
         }
         
         if dst_port in suspicious_ports:
@@ -272,3 +294,27 @@ class PacketAnalyzer:
         except Exception as e:
             logging.error(f"Error in ACK scan detection: {str(e)}")
             return False
+
+    def cleanup_old_data(self):
+        """Periodic cleanup of old data"""
+        current_time = time.time()
+        if current_time - self.last_cleanup < self.cleanup_interval:
+            return
+            
+        with self.lock:
+            # Cleanup scan detection history
+            for ip in list(self.scan_detection['history'].keys()):
+                if current_time - self.scan_detection['history'][ip]['last_reset'] > self.scan_detection['window_size'] * 2:
+                    del self.scan_detection['history'][ip]
+                    
+            # Cleanup ACK scan history
+            for ip in list(self.ack_scan_detection['history'].keys()):
+                if current_time - self.ack_scan_detection['history'][ip]['last_reset'] > self.ack_scan_detection['window_size'] * 2:
+                    del self.ack_scan_detection['history'][ip]
+                    
+            # Cleanup SYN count data
+            for ip in list(self.syn_count.keys()):
+                if current_time - self.syn_count[ip]['first_seen'] > 60:
+                    del self.syn_count[ip]
+                    
+            self.last_cleanup = current_time
