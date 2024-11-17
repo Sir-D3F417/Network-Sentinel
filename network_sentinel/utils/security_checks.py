@@ -6,7 +6,10 @@ from pathlib import Path
 from .validation import validate_interface
 import subprocess
 import sys
-import winreg
+
+# Only import winreg on Windows
+if os.name == 'nt':
+    import winreg
 
 class SecurityChecker:
     def __init__(self):
@@ -111,58 +114,71 @@ class SecurityChecker:
     def verify_dependencies(self):
         """Verify all required dependencies are installed and working"""
         try:
-            if os.name == 'nt':
+            # Check OS-specific dependencies
+            if os.name == 'nt':  # Windows
                 if not self._verify_npcap():
                     return False
+            else:  # Linux/Unix
+                if not self._verify_libpcap():
+                    return False
 
+            # Verify Python packages
             if not self._verify_python_packages():
                 return False
 
-            self._fix_wireshark_manuf()
             return True
+
         except Exception as e:
             self.logger.error(f"Error verifying dependencies: {e}")
             return False
 
     def _verify_npcap(self):
-        """Verify Npcap installation"""
+        """Verify Npcap installation on Windows"""
+        if os.name != 'nt':
+            return True
+
         try:
-            # Method 1: Check registry
-            try:
-                key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\WOW6432Node\Npcap")
-                winreg.CloseKey(key)
-                return True
-            except WindowsError:
+            registry_paths = [
+                r"SOFTWARE\WOW6432Node\Npcap",
+                r"SOFTWARE\Npcap"
+            ]
+            for path in registry_paths:
                 try:
-                    key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Npcap")
+                    key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, path)
                     winreg.CloseKey(key)
                     return True
                 except WindowsError:
-                    pass
-
-            # Method 2: Check common installation paths
-            npcap_paths = [
-                r"C:\Program Files\Npcap",
-                r"C:\Program Files (x86)\Npcap",
-                r"C:\Windows\System32\Npcap"
-            ]
-            
-            for path in npcap_paths:
-                if os.path.exists(path):
-                    return True
+                    continue
 
             self.logger.error("""
 Npcap is not properly installed. Please:
-1. Uninstall any existing Npcap installation
-2. Download latest Npcap from https://npcap.com/#download
-3. Run installer as administrator
-4. Select 'WinPcap API-compatible Mode'
-5. Restart your computer
+1. Download latest Npcap from https://npcap.com/#download
+2. Run installer as administrator
+3. Select 'WinPcap API-compatible Mode'
+4. Restart your computer
 """)
             return False
 
         except Exception as e:
             self.logger.error(f"Error checking Npcap: {e}")
+            return False
+
+    def _verify_libpcap(self):
+        """Verify libpcap installation on Linux/Unix"""
+        try:
+            # Check for libpcap using ldconfig
+            result = subprocess.run(['ldconfig', '-p'], capture_output=True, text=True)
+            if 'libpcap.so' not in result.stdout:
+                self.logger.error("""
+libpcap is not installed. Please install it:
+For Debian/Ubuntu: sudo apt-get install libpcap-dev
+For RHEL/CentOS: sudo yum install libpcap-devel
+For Arch Linux: sudo pacman -S libpcap
+""")
+                return False
+            return True
+        except Exception as e:
+            self.logger.error(f"Error checking libpcap: {e}")
             return False
 
     def _verify_python_packages(self):
