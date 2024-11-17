@@ -22,6 +22,25 @@ Network Sentinel is a sophisticated network security monitoring tool that uses m
 - 📝 Detailed logging and reporting
 - 🔐 Secure storage of sensitive data
 - 📈 Performance monitoring and optimization
+- Machine Learning Integration
+- Anomaly detection using Isolation Forest
+- Pattern recognition for attack detection
+- Adaptive threat detection with continuous learning
+- Real-time classification of threats
+### Real-time Monitoring
+- Live packet analysis and inspection
+- Traffic visualization and statistics
+- Resource usage monitoring
+- Performance optimization
+- Automated alerts
+
+### Security Features
+- Advanced scan detection
+- Flood attack prevention
+- Malware C2 detection
+- Secure data storage
+- Privilege management
+- Encrypted storage of sensitive data
 
 ### Security Features
 - SYN/ACK flood detection
