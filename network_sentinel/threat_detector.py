@@ -49,6 +49,10 @@ class ThreatDetector:
         self.min_samples_required = 1000
         self.samples_collected = 0
         
+        # Add timestamps for data cleanup
+        self.last_cleanup = time.time()
+        self.cleanup_interval = 300  # 5 minutes
+        
         self.load_models()
 
     def load_models(self):
@@ -165,6 +169,11 @@ class ThreatDetector:
         """Check and trigger model training if needed"""
         current_time = time.time()
         
+        # Periodic data cleanup
+        if current_time - self.last_cleanup > self.cleanup_interval:
+            self._cleanup_old_data()
+            self.last_cleanup = current_time
+        
         # Train anomaly detector
         if len(self.training_data) >= 1000 and not self.is_anomaly_trained:
             self._train_anomaly_detector()
@@ -203,3 +212,29 @@ class ThreatDetector:
             self.save_models()
         except Exception as e:
             logging.error(f"Error training classifier: {str(e)}")
+
+    def _cleanup_old_data(self):
+        """Clean up old training data to prevent memory leaks"""
+        try:
+            # Keep only recent data within a sliding window
+            cutoff_time = time.time() - 3600  # 1 hour window
+            
+            # Clean training data
+            if hasattr(self, 'training_timestamps'):
+                while (self.training_timestamps and 
+                       self.training_timestamps[0] < cutoff_time):
+                    self.training_timestamps.popleft()
+                    self.training_data.popleft()
+            
+            # Clean attack patterns
+            if hasattr(self, 'attack_timestamps'):
+                while (self.attack_timestamps and 
+                       self.attack_timestamps[0] < cutoff_time):
+                    self.attack_timestamps.popleft()
+                    self.attack_patterns.popleft()
+                    self.labels.popleft()
+                    
+            logging.debug("Completed periodic data cleanup")
+            
+        except Exception as e:
+            logging.error(f"Error during data cleanup: {str(e)}")
