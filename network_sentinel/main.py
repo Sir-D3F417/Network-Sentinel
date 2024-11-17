@@ -31,43 +31,57 @@ class SecurityError(Exception):
     pass
 
 class NetworkSentinel:
-    def __init__(self, config, skip_security_checks=False):
-        self.security = SecurityChecker()
-        self.secure_storage = SecureStorage()
-        
-        # Skip security checks if in testing mode
-        if not skip_security_checks and not self._perform_security_checks():
-            raise SecurityError("Security checks failed")
+    def __init__(self, config):
+        try:
+            self.config = config
+            self.security = SecurityChecker()
             
-        self.packet_counts = defaultdict(int)
-        self.suspicious_ips = set()
-        self.port_scan_threshold = 100
-        self.port_scan_counter = defaultdict(lambda: defaultdict(int))
-        self.console = Console(color_system="truecolor")
-        self.threat_detector = ThreatDetector()
-        self.packet_analyzer = PacketAnalyzer()
-        self.last_packet_times = {}
-        self.setup_logging()
-        self.running = True
-        self.stats = {
-            'total_packets': 0,
-            'suspicious_packets': 0,
-            'protocols': defaultdict(int),
-            'top_talkers': defaultdict(int),
-            'attack_types': defaultdict(int)
-        }
-        self.load_known_threats()
-        self.threat_buffer = deque(maxlen=10)  # Increase buffer size slightly
-        self.display_update_interval = 1  # Add refresh rate control
-        self.live_display = None
-        self.threat_cooldown = {}  # Track last alert time per IP
-        self.cooldown_period = 5  # Seconds between alerts for same IP/reason
-        self.consolidated_threats = defaultdict(lambda: {
-            'count': 0,
-            'first_seen': None,
-            'last_seen': None,
-            'level': 0
-        })
+            # Verify dependencies before proceeding
+            if not self.security.verify_dependencies():
+                raise RuntimeError("Required dependencies not satisfied")
+            
+            # Continue with rest of initialization
+            self.analyzer = PacketAnalyzer()
+            self.detector = ThreatDetector()
+            self.secure_storage = SecureStorage()
+            
+            # Skip security checks if in testing mode
+            if not self.security.is_test_environment and not self._perform_security_checks():
+                raise SecurityError("Security checks failed")
+            
+            self.packet_counts = defaultdict(int)
+            self.suspicious_ips = set()
+            self.port_scan_threshold = 100
+            self.port_scan_counter = defaultdict(lambda: defaultdict(int))
+            self.console = Console(color_system="truecolor")
+            self.threat_detector = ThreatDetector()
+            self.packet_analyzer = PacketAnalyzer()
+            self.last_packet_times = {}
+            self.setup_logging()
+            self.running = True
+            self.stats = {
+                'total_packets': 0,
+                'suspicious_packets': 0,
+                'protocols': defaultdict(int),
+                'top_talkers': defaultdict(int),
+                'attack_types': defaultdict(int)
+            }
+            self.load_known_threats()
+            self.threat_buffer = deque(maxlen=10)  # Increase buffer size slightly
+            self.display_update_interval = 1  # Add refresh rate control
+            self.live_display = None
+            self.threat_cooldown = {}  # Track last alert time per IP
+            self.cooldown_period = 5  # Seconds between alerts for same IP/reason
+            self.consolidated_threats = defaultdict(lambda: {
+                'count': 0,
+                'first_seen': None,
+                'last_seen': None,
+                'level': 0
+            })
+
+        except Exception as e:
+            logging.error(f"Initialization error: {e}")
+            raise
 
     def load_known_threats(self):
         try:
@@ -537,7 +551,7 @@ class NetworkSentinel:
 def show_banner():
     return """
 ╔═══════════════════════════════════════════════╗
-║         Network Sentinel - Version 2.0         ║
+║         Network Sentinel - Version 2.1         ��
 ║     Advanced Network Security Monitoring       ║
 ║                                               ║
 ║        Created by D3F417 (Beta Release)       ║
