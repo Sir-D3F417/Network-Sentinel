@@ -18,6 +18,13 @@ def cli():
 def monitor(interface, config, verbose):
     """Start network monitoring"""
     try:
+        # Check dependencies first
+        from network_sentinel.utils.security_checks import SecurityChecker
+        security = SecurityChecker()
+        if not security.verify_dependencies():
+            console.print("[red]Error: Required dependencies not satisfied[/red]")
+            sys.exit(1)
+            
         config = NetworkSentinelConfig.load(config)
         if verbose:
             config.log_level = "DEBUG"
