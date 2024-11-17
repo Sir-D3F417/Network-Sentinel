@@ -10,8 +10,13 @@ def validate_ip(ip_str):
 
 def validate_interface(interface):
     """Validate network interface name"""
-    if not re.match(r'^[a-zA-Z0-9_-]+$', interface):
-        raise ValueError("Invalid interface name")
+    if os.name == 'nt':  # Windows
+        # Allow Unicode characters for Windows interface names
+        if not re.match(r'^[a-zA-Z0-9_\- \u0080-\uffff]+$', interface):
+            raise ValueError("Invalid interface name")
+    else:  # Unix-like
+        if not re.match(r'^[a-zA-Z0-9_-]+$', interface):
+            raise ValueError("Invalid interface name")
     return interface
 
 def sanitize_filename(filename):
