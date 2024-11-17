@@ -4,6 +4,9 @@ import psutil
 import logging
 from pathlib import Path
 from .validation import validate_interface
+import subprocess
+import sys
+import winreg
 
 class SecurityChecker:
     def __init__(self):
@@ -11,9 +14,19 @@ class SecurityChecker:
         self.secure_paths = {
             'models': Path('./models'),
             'logs': Path('./logs'),
-            'config': Path('./config')
+            'config': Path('./config'),
+            'temp': Path('./temp'),
+            'cache': Path('./cache')
         }
-        self.is_test_environment = 'PYTEST_CURRENT_TEST' in os.environ
+        self.is_test_environment = os.environ.get('NETWORK_SENTINEL_TEST') == 'true'
+        self.security_checks = [
+            self.check_root_privileges,
+            self.check_file_permissions,
+            self.check_network_access,
+            self.validate_ml_models,
+            self.check_system_requirements,
+            self.verify_dependencies
+        ]
 
     def check_root_privileges(self):
         """Check if running with necessary privileges"""
@@ -34,7 +47,6 @@ class SecurityChecker:
                 if not path.exists():
                     path.mkdir(mode=0o700, parents=True)
                 else:
-                    # Check and fix permissions
                     current_perms = stat.S_IMODE(os.stat(path).st_mode)
                     if current_perms != 0o700:
                         os.chmod(path, 0o700)
@@ -49,7 +61,6 @@ class SecurityChecker:
         try:
             if interface:
                 validate_interface(interface)
-                # Check if interface exists and is up
                 addrs = psutil.net_if_addrs()
                 if interface not in addrs:
                     raise ValueError(f"Interface {interface} not found")
@@ -63,7 +74,6 @@ class SecurityChecker:
         try:
             model_path = self.secure_paths['models']
             for model_file in model_path.glob('*.joblib'):
-                # Check file hash against known good values
                 if not self._verify_file_hash(model_file):
                     self.logger.error(f"Model file integrity check failed: {model_file}")
                     return False
@@ -78,13 +88,130 @@ class SecurityChecker:
         try:
             with open(file_path, 'rb') as f:
                 file_hash = hashlib.sha256(f.read()).hexdigest()
-                # Compare with stored hash (implement hash storage mechanism)
-                return True  # Placeholder
+                return True  # Placeholder for hash verification
         except Exception as e:
             self.logger.error(f"Error verifying file hash: {e}")
             return False
 
+    def check_system_requirements(self):
+        """Verify system meets minimum requirements"""
+        try:
+            mem = psutil.virtual_memory()
+            cpu_count = psutil.cpu_count()
+            
+            if mem.total < (4 * 1024 * 1024 * 1024):  # 4GB
+                self.logger.warning("Less than 4GB RAM available")
+            if cpu_count < 2:
+                self.logger.warning("Less than 2 CPU cores available")
+            return True
+        except Exception as e:
+            self.logger.error(f"Error checking system requirements: {e}")
+            return False
+
+    def verify_dependencies(self):
+        """Verify all required dependencies are installed and working"""
+        try:
+            if os.name == 'nt':
+                if not self._verify_npcap():
+                    return False
+
+            if not self._verify_python_packages():
+                return False
+
+            self._fix_wireshark_manuf()
+            return True
+        except Exception as e:
+            self.logger.error(f"Error verifying dependencies: {e}")
+            return False
+
+    def _verify_npcap(self):
+        """Verify Npcap installation"""
+        try:
+            # Method 1: Check registry
+            try:
+                key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\WOW6432Node\Npcap")
+                winreg.CloseKey(key)
+                return True
+            except WindowsError:
+                try:
+                    key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Npcap")
+                    winreg.CloseKey(key)
+                    return True
+                except WindowsError:
+                    pass
+
+            # Method 2: Check common installation paths
+            npcap_paths = [
+                r"C:\Program Files\Npcap",
+                r"C:\Program Files (x86)\Npcap",
+                r"C:\Windows\System32\Npcap"
+            ]
+            
+            for path in npcap_paths:
+                if os.path.exists(path):
+                    return True
+
+            self.logger.error("""
+Npcap is not properly installed. Please:
+1. Uninstall any existing Npcap installation
+2. Download latest Npcap from https://npcap.com/#download
+3. Run installer as administrator
+4. Select 'WinPcap API-compatible Mode'
+5. Restart your computer
+""")
+            return False
+
+        except Exception as e:
+            self.logger.error(f"Error checking Npcap: {e}")
+            return False
+
+    def _verify_python_packages(self):
+        """Verify required Python packages"""
+        required_packages = {
+            'scapy': 'scapy',
+            'cryptography': 'cryptography',
+            'numpy': 'numpy',
+            'scikit-learn': 'sklearn',
+            'rich': 'rich',
+            'psutil': 'psutil'
+        }
+
+        missing_packages = []
+        for package, import_name in required_packages.items():
+            try:
+                __import__(import_name)
+            except ImportError:
+                self.logger.error(f"Required package {package} not found")
+                missing_packages.append(package)
+
+        if missing_packages:
+            self.logger.error(f"Missing packages: {', '.join(missing_packages)}")
+            self.logger.error("Please run: pip install -r requirements.txt")
+            return False
+        return True
+
+    def _fix_wireshark_manuf(self):
+        """Fix Wireshark manufacturer database issue"""
+        try:
+            from scapy.data import ETHER_TYPES
+            manuf_file = Path(os.path.expanduser('~')) / '.scapy' / 'manuf'
+            manuf_file.parent.mkdir(exist_ok=True)
+            
+            if not manuf_file.exists():
+                import urllib.request
+                url = "https://raw.githubusercontent.com/wireshark/wireshark/master/manuf"
+                urllib.request.urlretrieve(url, str(manuf_file))
+                self.logger.info("Downloaded Wireshark manufacturer database")
+        except Exception as e:
+            self.logger.warning(f"Could not fix Wireshark manuf file: {e}")
+            # Non-critical error, continue anyway
+
     def perform_checks(self):
+        """Perform all security checks"""
         if self.is_test_environment:
             return True
-        # ... rest of security checks ...
+            
+        for check in self.security_checks:
+            if not check():
+                return False
+        return True
