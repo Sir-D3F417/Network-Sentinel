@@ -67,6 +67,15 @@ Network Sentinel is a sophisticated network security monitoring tool that uses m
 - Limited IPv6 support
 - Memory optimization needed for large networks
 
+### Upcoming Features
+
+- Enhanced ML model accuracy
+- GUI interface
+- Network topology mapping
+- Threat intelligence integration
+- Advanced reporting system
+- Cloud integration
+
 ## 🐛 Reporting Issues
 
 ### Bug Reports
@@ -87,7 +96,7 @@ Network Sentinel is a sophisticated network security monitoring tool that uses m
 ## Created By
 - **Author**: D3F417
 - **Team**: RastaKhiz Team
-- **Version**: 2.0.0-beta
+- **Version**: 2.1.0
 
 ## Install system dependencies (Ubuntu/Debian)
 ```bash
